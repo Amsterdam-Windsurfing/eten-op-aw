@@ -22,7 +22,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/admin-users', function () {
-        return view('users');
-    })->name('users');
+    Route::resource('users', \App\Http\Controllers\UserController::class);
 });
