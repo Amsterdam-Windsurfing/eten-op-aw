@@ -19,8 +19,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return redirect('/dinner-events');
+    });
+
+    Route::resource('dinner-events', \App\Http\Controllers\DinnerEventController::class);
 
     Route::resource('users', \App\Http\Controllers\UserController::class);
 });
