@@ -1,6 +1,9 @@
 <x-app-layout>
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="block mb-8">
+                <a href="{{ route('dinner-events.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Evenement toevoegen</a>
+            </div>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@
                                         Bevestigd
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Aantal eters
+                                        Aanmeldingen
                                     </th>
                                     <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
                                     </th>
@@ -29,7 +32,7 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($dinnerEvents as $dinnerEvent)
-                                    <tr>
+                                    <tr class="{{ \Carbon\Carbon::parse($dinnerEvent->date)->between(\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()) ? 'bg-blue-100' : '' }}">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                             {{ $dinnerEvent->id }}
                                         </td>
@@ -42,7 +45,7 @@
                                             {{ $dinnerEvent->cook_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 {{ $dinnerEvent->event_verified_at ? '' : 'font-bold' }}">
                                             {{ $dinnerEvent->event_verified_at ? 'Ja' : 'Nee' }}
                                         </td>
 

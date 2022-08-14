@@ -25,6 +25,7 @@ return new class extends Migration
             $table->timestamp('registration_deadline');
             $table->timestamp('event_verified_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
