@@ -84,7 +84,7 @@ class DinnerEventController extends Controller
      */
     public function show(DinnerEvent $dinnerEvent)
     {
-        //
+        return view('dinner-events.show', compact('dinnerEvent'));
     }
 
     /**

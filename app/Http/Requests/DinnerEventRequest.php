@@ -71,7 +71,7 @@ class DinnerEventRequest extends FormRequest
 
         $validator->after(function ($validator) {
 
-            if ($this->routeIs('dinner-events.create')) {
+            if ($this->routeIs('dinner-events.store')) {
                 $date = strtotime($validator->getData()['date']);
 
                 // the date must be on a wednesday

@@ -24,5 +24,7 @@ Route::middleware([
 
     Route::resource('dinner-events', \App\Http\Controllers\DinnerEventController::class);
 
+    Route::resource('event-registrations', \App\Http\Controllers\EventRegistrationController::class);
+
     Route::resource('users', \App\Http\Controllers\UserController::class);
 });
