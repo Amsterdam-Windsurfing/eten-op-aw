@@ -42,6 +42,10 @@ class DinnerEvent extends Model
         return $this->hasMany(EventRegistration::class);
     }
 
+    public function eventRegistrationsCount() {
+        return $this->eventRegistrations()->whereNotNull('registration_verified_at')->count();
+    }
+
     public function eventRegistrationsOptions()
     {
         // calculate the number of registrations for each option

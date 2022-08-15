@@ -84,10 +84,14 @@
 
             @include('event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
 
-            <h5 class="font-medium leading-tight text-2xl mt-10 mb-6">Inschrijvingen</h5>
+            <h5 class="font-medium leading-tight text-2xl mt-10 mb-6">Overzicht inschrijvingen</h5>
 
             @include('event-registrations.index_include', ['eventRegistrations' => $dinnerEvent->eventRegistrations])
 
+            <div class="mt-8">
+                <a href="{{ route('dinner-events.overview-pdf', $dinnerEvent->id) }}"
+                   class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Download PDF registratielijst</a>
+            </div>
         </div>
     </div>
 </x-app-layout>
