@@ -58,20 +58,20 @@ class EventRegistrationsPDFRenerator {
         $this->document->Cell(0,14,"Samenvatting inschrijvingen",0,"","L");
         $this->document->Ln();
 
-        if ($this->dinnerEvent->meat_option) {
+        if ($this->dinnerEvent->meat_option || $this->dinnerEvent->eventRegistrationsOptions()["meat"]) {
             $this->document->SetFont(self::FONT_FAMILY,'',10);
             $this->document->cell(35,10," Vlees",1,"","L");
             $this->document->cell(10,10, $this->dinnerEvent->eventRegistrationsOptions()["meat"],1,"","C");
             $this->document->Ln();
         }
 
-        if ($this->dinnerEvent->vegetarian_option) {
+        if ($this->dinnerEvent->vegetarian_option || $this->dinnerEvent->eventRegistrationsOptions()["vegetarian"]) {
             $this->document->cell(35, 10, " Vegetarisch", 1, "", "L");
             $this->document->cell(10, 10, $this->dinnerEvent->eventRegistrationsOptions()["vegetarian"], 1, "", "C");
             $this->document->Ln();
         }
 
-        if ($this->dinnerEvent->vegan_option) {
+        if ($this->dinnerEvent->vegan_option || $this->dinnerEvent->eventRegistrationsOptions()["vegan"]) {
             $this->document->cell(35,10," Vegan",1,"","L");
             $this->document->cell(10,10, $this->dinnerEvent->eventRegistrationsOptions()["vegan"],1,"","C");
             $this->document->Ln();

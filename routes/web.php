@@ -29,6 +29,4 @@ Route::middleware([
     Route::resource('event-registrations', \App\Http\Controllers\EventRegistrationController::class);
 
     Route::resource('users', \App\Http\Controllers\UserController::class);
-
-    Route::resource('pdf', \App\Http\Controllers\PDFController::class);
 });
