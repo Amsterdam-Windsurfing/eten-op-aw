@@ -22,11 +22,11 @@ Route::middleware([
         return redirect('/dinner-events');
     });
 
-    Route::get('/dinner-events/{id}/pdf', [\App\Http\Controllers\PDFController::class, 'eventRegistrations'])->name('dinner-events.overview-pdf');
+    Route::get('/dinner-events/{id}/pdf', [\App\Http\Controllers\Admin\PDFController::class, 'eventRegistrations'])->name('dinner-events.overview-pdf');
 
-    Route::resource('dinner-events', \App\Http\Controllers\DinnerEventController::class);
+    Route::resource('dinner-events', \App\Http\Controllers\Admin\DinnerEventController::class);
 
-    Route::resource('event-registrations', \App\Http\Controllers\EventRegistrationController::class);
+    Route::resource('event-registrations', \App\Http\Controllers\Admin\EventRegistrationController::class);
 
-    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 });
