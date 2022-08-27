@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\DinnerEvent;
+use App\Util\WednesdaysForDinnerEvents;
 
 class DinnerEventController extends Controller
 {
     /**
-     * Returns a JSON object with the two upcoming dinner events.
      *
      * @return \Illuminate\Http\Response
      */
-    public function upcoming()
+    public function index()
     {
-        return [];
+        // get the next two wednesdays
+        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(2);
+
+        return view('dinner-events.index');
     }
 
     /**

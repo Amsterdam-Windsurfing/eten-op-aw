@@ -13,20 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/', function () {
-        return redirect('/dinner-events');
-    });
-
-    Route::get('/dinner-events/{id}/pdf', [\App\Http\Controllers\Admin\PDFController::class, 'eventRegistrations'])->name('dinner-events.overview-pdf');
-
-    Route::resource('dinner-events', \App\Http\Controllers\Admin\DinnerEventController::class);
-
-    Route::resource('event-registrations', \App\Http\Controllers\Admin\EventRegistrationController::class);
-
-    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+Route::get('/', function () {
+    return redirect('/dinner-events');
 });
+Route::resource('dinner-events', \App\Http\Controllers\DinnerEventController::class);
+
+Route::resource('event-registrations', \App\Http\Controllers\EventRegistrationController::class);
+
+Route::name('admin.')->group(function () {
+    Route::prefix('admin')->group(function () {
+
+        Route::middleware([
+            'auth:sanctum',
+            config('jetstream.auth_session'),
+            'verified'
+        ])->group(function () {
+            Route::get('/', function () {
+                return redirect('/admin/dinner-events');
+            });
+
+            Route::get('/dinner-events/{id}/pdf', [\App\Http\Controllers\Admin\PDFController::class, 'eventRegistrations'])->name('dinner-events.overview-pdf');
+
+            Route::resource('dinner-events', \App\Http\Controllers\Admin\DinnerEventController::class);
+
+            Route::resource('event-registrations', \App\Http\Controllers\Admin\EventRegistrationController::class);
+
+            Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+        });
+    });
+});
+

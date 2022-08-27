@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => 'admin',
 
     'domain' => null,
 
@@ -142,6 +142,15 @@ return [
 //            'confirmPassword' => true,
 //            // 'window' => 0,
 //        ]),
+    ],
+
+    'redirects' => [
+        'login' => 'admin',
+        'logout' => 'admin',
+        'password-confirmation' => null,
+        'register' => null,
+        'email-verification' => null,
+        'password-reset' => null,
     ],
 
 ];

@@ -1,11 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreEventRegistrationRequest;
-use App\Http\Requests\UpdateEventRegistrationRequest;
-use App\Models\EventRegistration;
+namespace App\Http\Controllers;
 
 class EventRegistrationController extends Controller
 {

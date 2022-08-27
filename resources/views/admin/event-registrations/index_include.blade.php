@@ -62,7 +62,7 @@
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <form class="inline-block" action="{{ route('event-registrations.destroy', $eventRegistration->id) }}" method="POST" onsubmit="return confirm('Weet je het zeker?');">
+                                <form class="inline-block" action="{{ route('admin.event-registrations.destroy', $eventRegistration->id) }}" method="POST" onsubmit="return confirm('Weet je het zeker?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Verwijder">

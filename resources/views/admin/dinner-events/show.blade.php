@@ -8,10 +8,10 @@
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-6 flex items-center justify-between">
-                <a href="{{ route('dinner-events.index') }}"
+                <a href="{{ route('admin.dinner-events.index') }}"
                    class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded">Back to list</a>
 
-                <a href="{{ route('dinner-events.edit', $dinnerEvent->id) }}"
+                <a href="{{ route('admin.dinner-events.edit', $dinnerEvent->id) }}"
                    class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Evenement
                     bewerken</a>
             </div>
@@ -82,15 +82,16 @@
 
             <h5 class="font-medium leading-tight text-2xl mt-10 mb-6">Samenvatting inschrijvingen</h5>
 
-            @include('event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
+            @include('admin.event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
 
             <h5 class="font-medium leading-tight text-2xl mt-10 mb-6">Overzicht inschrijvingen</h5>
 
-            @include('event-registrations.index_include', ['eventRegistrations' => $dinnerEvent->eventRegistrations])
+            @include('admin.event-registrations.index_include', ['eventRegistrations' => $dinnerEvent->eventRegistrations])
 
             <div class="mt-8">
-                <a href="{{ route('dinner-events.overview-pdf', $dinnerEvent->id) }}"
-                   class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Download PDF registratielijst</a>
+                <a href="{{ route('admin.dinner-events.overview-pdf', $dinnerEvent->id) }}"
+                   class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Download PDF
+                    registratielijst</a>
             </div>
         </div>
     </div>

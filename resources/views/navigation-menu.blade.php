@@ -12,12 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dinner-events.index') }}" :active="request()->routeIs('dinner-events.*')">
+                    <x-jet-nav-link href="{{ route('admin.dinner-events.index') }}" :active="request()->routeIs('dinner-events.*')">
                         Eten op AW
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                    <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('users.*')">
                         Admin gebruikers
                     </x-jet-nav-link>
                 </div>
@@ -92,12 +92,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dinner-events.index') }}" :active="request()->routeIs('dinner-events.*')">
+            <x-jet-responsive-nav-link href="{{ route('admin.dinner-events.index') }}" :active="request()->routeIs('dinner-events.*')">
                 Eten op AW
             </x-jet-responsive-nav-link>
         </div>
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+            <x-jet-nav-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('users.*')">
                 Admin gebruikers
             </x-jet-nav-link>
         </div>
