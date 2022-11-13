@@ -1,76 +1,30 @@
-<x-app-layout>
-    <div>
-        <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
-            <div class="block mb-8">
-                <a href="{{ route('dinner-events.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Evenement toevoegen</a>
-            </div>
-            <div class="flex flex-col">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200 w-full">
-                                <thead>
-                                <tr>
-                                    <th scope="col" width="50" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Datum
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Kok
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Bevestigd
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Aanmeldingen
-                                    </th>
-                                    <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($dinnerEvents as $dinnerEvent)
-                                    <tr class="{{ \Carbon\Carbon::parse($dinnerEvent->date)->between(\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()) ? 'bg-blue-100' : '' }}">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $dinnerEvent->id }}
-                                        </td>
+<x-guest-layout>
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ \Carbon\Carbon::parse($dinnerEvent->date)->format('j-m-Y') }}
-                                        </td>
+        @foreach ($nextWednesdays as $nextWednesday)
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $dinnerEvent->cook_name }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 {{ $dinnerEvent->event_verified_at ? '' : 'font-bold' }}">
-                                            {{ $dinnerEvent->event_verified_at ? 'Ja' : 'Nee' }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                           {{ $dinnerEvent->eventRegistrationsCount() }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            <a href="{{ route('dinner-events.show', $dinnerEvent->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">Bekijk</a>
-                                            <a href="{{ route('dinner-events.edit', $dinnerEvent->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Wijzigen</a>
-                                            <form class="inline-block" action="{{ route('dinner-events.destroy', $dinnerEvent->id) }}" method="POST" onsubmit="return confirm('Weet je het zeker?');">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="submit" class="text-red-600 hover:text-red-900 mb-2 mr-2" value="Verwijder">
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">Samen eten op de Woensdagavond  {{ \Carbon\Carbon::createFromTimestamp($nextWednesday["date"])->format('j F Y') }}</h3>
                 </div>
-            </div>
 
-        </div>
+                @if($nextWednesday["dinnerEvent"])
+                <div>
+                    Er is een kok
+                </div>
+
+                @else
+                    <div class="px-4 py-5 bg-white sm:p-6">
+                        <label for="cook_name" class="block font-medium text-sm text-gray-700">Wat is je naam</label>
+                        <input type="text" name="cook_name" id="cook_name" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                               value="{{ old('cook_name', '') }}" />
+                        @error('cook_name')
+                        <p class="text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                @endif
+            </div>
+        @endforeach
+
     </div>
-</x-app-layout>
+</x-guest-layout>

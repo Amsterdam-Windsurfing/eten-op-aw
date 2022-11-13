@@ -15,7 +15,7 @@ class DinnerEventController extends Controller
         // get the next two wednesdays
         $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(2);
 
-        return view('dinner-events.index');
+        return view('dinner-events.index', compact('nextWednesdays'));
     }
 
     /**
