@@ -17,10 +17,11 @@ class DinnerEventController extends Controller
     {
         $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
         $nextWednesday = $nextWednesdays[0];
+        $dinnerEvent = $nextWednesdays[0]["dinnerEvent"];
 
         $suggestedRegistrationDeadline = $nextWednesday["date"]->copy()->subDays(1)->setTime(22, 0, 0);
 
-        return view('dinner-events.create', compact('nextWednesday', 'suggestedRegistrationDeadline'));
+        return view('dinner-events.create', compact('nextWednesday', 'dinnerEvent', 'suggestedRegistrationDeadline'));
 
     }
 
@@ -34,8 +35,8 @@ class DinnerEventController extends Controller
     {
         $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
         $nextWednesday = $nextWednesdays[0];
-        $createdDinnerEvent = DinnerEvent::create(["date" => $nextWednesdays[0]["date"]->toDate(), ...$request->validated()]);
 
+        $createdDinnerEvent = DinnerEvent::create(["date" => $nextWednesdays[0]["date"]->toDate(), ...$request->validated()]);
         $createdDinnerEvent->save();
 
         $cookName = $createdDinnerEvent->cook_name;
