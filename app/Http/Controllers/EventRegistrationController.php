@@ -2,27 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DinnerEventRequest;
 use App\Http\Requests\EventRegistrationRequest;
-use App\Models\DinnerEvent;
 use App\Models\EventRegistration;
 use App\Util\WednesdaysForDinnerEvents;
 
 class EventRegistrationController extends Controller
 {
-    /**
-     * Creates a new event registration.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
-        $dinnerEvent = $nextWednesdays[0]["dinnerEvent"];
-
-        return view('event-registrations.create', compact( 'dinnerEvent'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *

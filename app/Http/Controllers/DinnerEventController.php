@@ -9,23 +9,6 @@ use App\Util\WednesdaysForDinnerEvents;
 class DinnerEventController extends Controller
 {
     /**
-     * Creates a new dinner event.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
-        $nextWednesday = $nextWednesdays[0];
-        $dinnerEvent = $nextWednesdays[0]["dinnerEvent"];
-
-        $suggestedRegistrationDeadline = $nextWednesday["date"]->copy()->subDays(1)->setTime(22, 0, 0);
-
-        return view('dinner-events.create', compact('nextWednesday', 'dinnerEvent', 'suggestedRegistrationDeadline'));
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\DinnerEventRequest $request
