@@ -8,16 +8,16 @@
                     woensdagavond {{ $nextWednesday["date"]->format('j F Y') }}</h3>
             </div>
 
-            @if($nextWednesday["dinnerEvent"])
+            @if($dinnerEvent)
 
-                <h4 class="px-4 sm:px-6 my-2 text-md font-semibold text-gray-900">Er wordt gekookt door {{ $nextWednesday["dinnerEvent"]->cook_name }}! <span
+                <h4 class="px-4 sm:px-6 my-2 text-md font-semibold text-gray-900">Er wordt gekookt door {{ $dinnerEvent->cook_name }}! <span
                         class="text-2xl align-middle">👩‍🍳 🎉</span></h4>
 
-                <p class="px-4 sm:px-6 my-2 mb-6 text-base text-gray-700">{{ $nextWednesday["dinnerEvent"]->description }}</p>
+                <p class="px-4 sm:px-6 my-2 mb-6 text-base text-gray-700">{{ $dinnerEvent->description }}</p>
 
-                @include('event-registrations.summary_include', ['dinnerEvent' => $nextWednesday["dinnerEvent"], 'registrationsOptions' => $nextWednesday["dinnerEvent"]->eventRegistrationsOptions()])
+                @include('event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
 
-                <p class="px-4 sm:px-6 py-2 text-base text-white-700 bg-slate-200">Je kan je aanmelden tot <strong>{{ $nextWednesday["dinnerEvent"]->registration_deadline->format('l \d\e jS - H:m') }}</strong>.</p>
+                <p class="px-4 sm:px-6 py-2 text-base text-white-700 bg-slate-200">Je kan je aanmelden tot <strong>{{ $dinnerEvent->registration_deadline->format('l \d\e jS - H:m') }}</strong>.</p>
 
             @else
                 @include('dinner-events.create_form_include')

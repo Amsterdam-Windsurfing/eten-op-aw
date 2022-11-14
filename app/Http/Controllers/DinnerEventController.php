@@ -37,7 +37,6 @@ class DinnerEventController extends Controller
         $nextWednesday = $nextWednesdays[0];
 
         $createdDinnerEvent = DinnerEvent::create(["date" => $nextWednesdays[0]["date"]->toDate(), ...$request->validated()]);
-        $createdDinnerEvent->save();
 
         $cookName = $createdDinnerEvent->cook_name;
 

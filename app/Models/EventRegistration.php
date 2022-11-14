@@ -10,8 +10,22 @@ class EventRegistration extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'allergies',
+        'dinner_option',
+        'dinner_event_id',
+        'registration_verified_at'
+    ];
+
     public function dinnerEvent()
     {
-        return $this->hasOne(DinnerEvent::class);
+        return $this->belongsTo(DinnerEvent::class);
     }
 }

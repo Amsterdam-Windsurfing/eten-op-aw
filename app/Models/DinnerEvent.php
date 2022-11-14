@@ -25,6 +25,7 @@ class DinnerEvent extends Model
         'vegetarian_option',
         'vegan_option',
         'registration_deadline',
+        'event_verified_at',
     ];
 
     /**
