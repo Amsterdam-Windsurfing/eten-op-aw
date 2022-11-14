@@ -68,7 +68,7 @@
                                 <tr class="border-b">
                                     <th scope="col"
                                         class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Geverifieerd
+                                        Bevestigd
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
                                         {{ $dinnerEvent->event_verified_at ? 'Ja (op ' . \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->format('d-m-Y H:i:s') . ')' : 'Nee' }}
