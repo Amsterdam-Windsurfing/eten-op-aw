@@ -36,10 +36,6 @@ class WednesdaysForDinnerEvents {
             $nextWednesdays[$key] = $date;
         }
 
-        ray(Carbon::now()->format('Y-m-d H:i:s'));
-        ray('Next wedn');
-        ray($nextWednesdays);
-
         return $nextWednesdays;
     }
 }

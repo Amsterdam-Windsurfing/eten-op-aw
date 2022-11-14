@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use App\Models\DinnerEvent;
-use App\Util\WednesdaysForDinnerEvents;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DinnerEventRequest extends FormRequest
@@ -56,6 +55,14 @@ class DinnerEventRequest extends FormRequest
             ],
         ];
 
+        // only for creation the date is required
+        if ($this->routeIs('admin.dinner-events.store')) {
+            $rules['date'][] = [
+                'date',
+                'required',
+            ];
+        }
+
         return $rules;
     }
 
@@ -64,14 +71,22 @@ class DinnerEventRequest extends FormRequest
 
         $validator->after(function ($validator) {
 
-            // public creation of events are always for next wednesday
-            $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
-            $date = $nextWednesdays[0]["date"]->getTimestamp();
+            if ($this->routeIs('admin.dinner-events.store')) {
+                $date = strtotime($validator->getData()['date']);
 
-            // there must NOT already be a verified dinner event on that date
-            $existingEvent = DinnerEvent::where('date', date('Y-m-d', $date))->whereNotNull('event_verified_at')->first();
-            if ($existingEvent) {
-                $validator->errors()->add('general', 'Er gaat al iemand koken op deze datum.');
+                // the date must be on a wednesday
+                if (date("l", $date) != "Wednesday") {
+                    $validator->errors()->add('date', 'The date must be on a Wednesday');
+                }
+
+                // there must NOT already be a verified dinner event on that date
+                $existingEvent = DinnerEvent::where('date', date('Y-m-d', $date))->whereNotNull('event_verified_at')->first();
+                if ($existingEvent) {
+                    $validator->errors()->add('date', 'There is already a verified dinner event on that date');
+                }
+            } else {
+                // the date cannot be updated so get the date from the model
+                $date = strtotime($this->route()->parameters()['dinner_event']['date']);
             }
 
             $registrationDeadline = strtotime($validator->getData()['registration_deadline']);
@@ -79,13 +94,13 @@ class DinnerEventRequest extends FormRequest
             // the registration deadline must be after the saturday before the event AND before midnight of the event (in case of a late registration possibility)
             $saturdayBefore = strtotime("-1 week Saturday", $date);
             if ($registrationDeadline < $saturdayBefore) {
-                $validator->errors()->add('registration_deadline', 'Dit is een ongeldige datum voor deze woensdag.');
+                $validator->errors()->add('registration_deadline', 'The registration deadline must be after the saturday before the event');
             }
 
             // wednesday night of the date
             $wednesdayNight = strtotime("23:59", $date);
             if ($registrationDeadline > $wednesdayNight) {
-                $validator->errors()->add('registration_deadline', 'Dit is een ongeldige datum voor deze woensdag.');
+                $validator->errors()->add('registration_deadline', 'The registration deadline must be before midnight of the event');
             }
 
             // there must be at least one dinner option (meat, vegetarian or vegan) checked.
@@ -93,7 +108,7 @@ class DinnerEventRequest extends FormRequest
             $vegetarianOption = $validator->getData()['vegetarian_option'];
             $veganOption = $validator->getData()['vegan_option'];
             if (!$meatOption && !$vegetarianOption && !$veganOption) {
-                $validator->errors()->add('dinner_options', 'Je moet aangeven of je vlees, vegetarisch en/of vegan gaat koken.');
+                $validator->errors()->add('dinner_options', 'At least one dinner option must be checked.');
             }
         });
     }
@@ -110,6 +125,11 @@ class DinnerEventRequest extends FormRequest
             'vegetarian_option' => $this->toBoolean($this->vegetarian_option),
             'vegan_option' => $this->toBoolean($this->vegan_option),
         ]);
+
+        // the date may not be changed after creation
+        if ($this->routeIs('dinner-events.update')) {
+            $this->request->remove('date');
+       }
     }
 
 

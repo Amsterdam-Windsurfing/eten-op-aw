@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DinnerEventRequest;
+use App\Http\Requests\Admin\DinnerEventRequest;
 use App\Http\Requests\UpdateDinnerEventRequest;
 use App\Models\DinnerEvent;
 use App\Util\WednesdaysForDinnerEvents;
@@ -39,7 +39,7 @@ class DinnerEventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\DinnerEventRequest  $request
+     * @param  \App\Http\Requests\Admin\DinnerEventRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(DinnerEventRequest $request)
@@ -78,7 +78,7 @@ class DinnerEventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\DinnerEventRequest  $request
+     * @param  \App\Http\Requests\Admin\DinnerEventRequest  $request
      * @param  \App\Models\DinnerEvent  $dinnerEvent
      * @return \Illuminate\Http\Response
      */

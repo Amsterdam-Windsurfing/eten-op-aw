@@ -2,22 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DinnerEventRequest;
+use App\Models\DinnerEvent;
 use App\Util\WednesdaysForDinnerEvents;
 
 class DinnerEventController extends Controller
 {
-    /**
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // get the next two wednesdays
-        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(2);
-
-        return view('dinner-events.index', compact('nextWednesdays'));
-    }
-
     /**
      * Creates a new dinner event.
      *
@@ -25,7 +15,33 @@ class DinnerEventController extends Controller
      */
     public function create()
     {
-        return [];
+        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
+        $nextWednesday = $nextWednesdays[0];
+
+        $suggestedRegistrationDeadline = $nextWednesday["date"]->copy()->subDays(1)->setTime(22, 0, 0);
+
+        return view('dinner-events.create', compact('nextWednesday', 'suggestedRegistrationDeadline'));
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\DinnerEventRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(DinnerEventRequest $request)
+    {
+        $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
+        $nextWednesday = $nextWednesdays[0];
+        $createdDinnerEvent = DinnerEvent::create(["date" => $nextWednesdays[0]["date"]->toDate(), ...$request->validated()]);
+
+        $createdDinnerEvent->save();
+
+        $cookName = $createdDinnerEvent->cook_name;
+
+        return view('dinner-events.created', compact('nextWednesday', 'cookName'));
+
     }
 
     /**
