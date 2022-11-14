@@ -17,5 +17,7 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+
+        @include('popper::assets')
     </body>
 </html>
