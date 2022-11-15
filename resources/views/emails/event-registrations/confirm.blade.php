@@ -1,6 +1,6 @@
 Hoi {{ $eventRegistration->name }},
 
-Gezellig dat je mee wilt eten op woensdagavond {{ $eventRegistration->DinnerEvent["date"]->format('j F Y') }}!
+Gezellig dat je mee wilt eten op woensdagavond {{ $eventRegistration->DinnerEvent["date"]->translatedFormat('j F Y') }}!
 Om je aanmelding definitief te maken moet je deze bevestigen door op de onderstaande link te klikken:
 
 {{ $confirmUrl }}

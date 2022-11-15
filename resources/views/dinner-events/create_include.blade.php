@@ -2,7 +2,7 @@
 
     <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <h3 class="text-lg leading-6 font-bold text-gray-900">Samen eten op de
-            woensdagavond {{ $nextWednesday["date"]->format('j F Y') }}</h3>
+            woensdagavond {{ $nextWednesday["date"]->translatedFormat('j F Y') }}</h3>
     </div>
 
     @if($dinnerEvent)
@@ -16,7 +16,7 @@
         @include('event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
 
         <p class="px-4 sm:px-6 py-2 text-base text-white-700 bg-slate-200">Je kan je aanmelden tot
-            <strong>{{ $dinnerEvent->registration_deadline->format('l \d\e jS - H:m') }}</strong>.</p>
+            <strong>{{ $dinnerEvent->registration_deadline->translatedFormat('l \d\e jS - H:m') }}</strong>.</p>
 
     @else
         @include('dinner-events.create_form_include')

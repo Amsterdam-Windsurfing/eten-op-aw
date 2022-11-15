@@ -46,8 +46,8 @@ class EventRegistrationsPDFRenerator {
 
     private function writeEventDetails() {
         $this->document->SetFont(self::FONT_FAMILY,'',11);
-        $this->writeLine("Datum", \Carbon\Carbon::parse($this->dinnerEvent->date)->format('l j F Y'));
-        $this->writeLine("Rapport gegenereerd op", \Carbon\Carbon::now()->format('l j F Y - H:i:s'));
+        $this->writeLine("Datum", \Carbon\Carbon::parse($this->dinnerEvent->date)->translatedFormat('l j F Y'));
+        $this->writeLine("Rapport gegenereerd op", \Carbon\Carbon::now()->translatedFormat('l j F Y - H:i:s'));
         $this->writeLine("Naam kok", $this->dinnerEvent->cook_name);
         $this->writeLine("Omschrijving", $this->dinnerEvent->description);
         $this->document->Ln();

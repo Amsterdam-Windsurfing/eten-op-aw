@@ -38,7 +38,7 @@
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {{ \Carbon\Carbon::parse($dinnerEvent->created_at)->format('d-m-Y H:i:s') }}
+                                {{ \Carbon\Carbon::parse($dinnerEvent->created_at)->translatedFormat('d-m-Y H:i:s') }}
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

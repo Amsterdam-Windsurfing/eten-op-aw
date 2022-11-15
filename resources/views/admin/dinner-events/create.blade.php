@@ -18,7 +18,7 @@
                                     <option value="">Selecteer een datum</option>
                                     @foreach ($nextWednesdays as $nextWednesday)
                                         <option value="{{ $nextWednesday["formValue"] }}" @selected(old('date') == $nextWednesday["formValue"]) @disabled(!$nextWednesday["available"])>
-                                            {{ $nextWednesday["date"]->format('l j F Y') }} {{  !$nextWednesday["available"] ? "(".$nextWednesday["cookName"]." kookt)" : "" }}
+                                            {{ $nextWednesday["date"]->translatedFormat('l j F Y') }} {{  !$nextWednesday["available"] ? "(".$nextWednesday["cookName"]." kookt)" : "" }}
                                         </option>
                                     @endforeach
                                 </select>

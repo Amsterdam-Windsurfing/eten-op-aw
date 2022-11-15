@@ -26,7 +26,7 @@
                                         Datum
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ \Carbon\Carbon::parse($dinnerEvent->date)->format('l j F Y') }}
+                                        {{ \Carbon\Carbon::parse($dinnerEvent->date)->translatedFormat('l j F Y') }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -35,7 +35,7 @@
                                         Deadline registratie
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->format('l j F Y - H:i') }}
+                                        {{ \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->translatedFormat('l j F Y - H:i') }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -71,7 +71,7 @@
                                         Bevestigd
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $dinnerEvent->event_verified_at ? 'Ja (op ' . \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->format('d-m-Y H:i:s') . ')' : 'Nee' }}
+                                        {{ $dinnerEvent->event_verified_at ? 'Ja (op ' . \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->translatedFormat('d-m-Y H:i:s') . ')' : 'Nee' }}
                                     </td>
                                 </tr>
                             </table>

@@ -15,7 +15,7 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="date" class="block font-medium text-sm text-gray-700">Datum</label>
-                            <div>{{ \Carbon\Carbon::parse($dinnerEvent->date)->format('l j F Y') }}</div>
+                            <div>{{ \Carbon\Carbon::parse($dinnerEvent->date)->translatedFormat('l j F Y') }}</div>
                         </div>
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="registration_deadline" class="block font-medium text-sm text-gray-700">Deadline registratie</label>
