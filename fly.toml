@@ -19,6 +19,11 @@ processes = []
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   DB_CONNECTION = "pgsql"
+  MAIL_MAILER = "mailgun"
+  MAILGUN_DOMAIN = "mg.amsterdamwindsurfing.nl"
+  MAILGUN_ENDPOINT = "api.eu.mailgun.net"
+  MAIL_FROM_ADDRESS="no-reply@amsterdamwindsurfing.nl"
+  MAIL_FROM_NAME="Amsterdam Windsurfing"
 
 [experimental]
   allowed_public_ports = []
@@ -49,6 +54,10 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[processes]
+  app = ""
+  cron = "cron -f"
 
 [deploy]
   release_command = "php /var/www/html/artisan migrate --force"
