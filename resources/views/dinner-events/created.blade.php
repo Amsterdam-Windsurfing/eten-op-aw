@@ -13,7 +13,7 @@
 
             <p class="px-4 sm:px-6 my-3 text-base text-gray-700">Leuk dat je wilt gaan koken op woensdagavond {{ $nextWednesday["date"]->translatedFormat('j F Y') }}!
             </p>
-            <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
+            <p class="px-4 sm:px-6 py-3 text-base text-grey-800 bg-red-300">
                 Je ontvangt zo meteen een e-mail om jou aanmelding als kok te bevestingen.
                 Zodra je bevestigd hebt kunnen leden zich aanmelden voor het eten.
             </p>
