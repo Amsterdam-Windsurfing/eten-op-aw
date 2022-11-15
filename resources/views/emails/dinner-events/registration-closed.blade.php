@@ -9,4 +9,4 @@ Er hebben zich {{ $dinnerEvent->eventRegistrationsCount() }} personen geregistre
 Bijgaand vind je een overzicht van alle aanmelingen, voor welke optie er gekozen is (vlees, vegetarisch of vegan),
 en of er evt. allergieën zijn waar je regening mee moet houden.
 
-Heel veel succes met koken woensdag!
+Succes met koken woensdag!

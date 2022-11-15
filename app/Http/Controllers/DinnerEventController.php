@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DinnerEventRequest;
+use App\Mail\DinnerEventConfirm;
 use App\Models\DinnerEvent;
 use App\Util\WednesdaysForDinnerEvents;
+use Illuminate\Support\Facades\Mail;
 
 class DinnerEventController extends Controller
 {
@@ -20,6 +22,10 @@ class DinnerEventController extends Controller
         $nextWednesday = $nextWednesdays[0];
 
         $createdDinnerEvent = DinnerEvent::create(["date" => $nextWednesdays[0]["date"]->toDate(), ...$request->validated()]);
+
+        // Send confirm email
+        Mail::to($createdDinnerEvent->cook_email)->send(new DinnerEventConfirm($createdDinnerEvent));
+
 
         $cookName = $createdDinnerEvent->cook_name;
 

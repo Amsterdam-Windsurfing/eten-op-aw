@@ -14,7 +14,7 @@
 
             @if($createdEventRegistration->registration_verified_at)
                 <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
-                    Je aanmelding voor het eten is definitief. Mocht je onverwacht toch niet kunnen komen, dan kan je je aanmelding nog annuleren vóór <span class="break-keep">{{ $createdEventRegistration->DinnerEvent["registration_deadline"]->format('j F Y H:m') }}</span> via de link in de bevestigings e-mail.
+                    Je aanmelding voor het eten is definitief.
                 </p>
 
                 <h4 class="px-4 sm:px-6 py-2 my-4 text-md font-semibold text-gray-900">Tot woensdag!</h4>

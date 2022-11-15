@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRegistrationRequest;
+use App\Mail\DinnerEventConfirm;
+use App\Mail\EventRegistrationConfirm;
 use App\Models\EventRegistration;
 use App\Util\WednesdaysForDinnerEvents;
+use Illuminate\Support\Facades\Mail;
 
 class EventRegistrationController extends Controller
 {
@@ -27,6 +30,9 @@ class EventRegistrationController extends Controller
             ...$request->validated()
         ]);
 
+        // Send confirm email
+        Mail::to($createdEventRegistration->email)->send(new EventRegistrationConfirm($createdEventRegistration));
+
         return view('event-registrations.created', compact('createdEventRegistration'));
     }
 
@@ -37,16 +43,6 @@ class EventRegistrationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function confirm()
-    {
-        return [];
-    }
-
-    /**
-     * Cancels an event registration.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function cancel()
     {
         return [];
     }
