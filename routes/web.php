@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('/', \App\Http\Controllers\HomeController::class);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('dinner-events/{id}/confirm', [\App\Http\Controllers\DinnerEventController::class, 'confirm'])
     ->middleware('signed')
