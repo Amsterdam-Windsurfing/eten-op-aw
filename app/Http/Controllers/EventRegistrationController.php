@@ -30,9 +30,12 @@ class EventRegistrationController extends Controller
             ...$request->validated()
         ]);
 
-        // Send confirm email
-        $confirmUrl = URL::signedRoute('confirmEventRegistration', ['id' => $eventRegistration->id]);
-        Mail::to($eventRegistration->email)->send(new EventRegistrationConfirm($eventRegistration, $confirmUrl));
+        if (!$emailVerifiedBefore) {
+            // Send confirm email
+            $confirmUrl = URL::signedRoute('confirmEventRegistration', ['id' => $eventRegistration->id]);
+            Mail::to($eventRegistration->email)->send(new EventRegistrationConfirm($eventRegistration, $confirmUrl));
+        }
+
 
         return view('event-registrations.created', compact('eventRegistration'));
     }
