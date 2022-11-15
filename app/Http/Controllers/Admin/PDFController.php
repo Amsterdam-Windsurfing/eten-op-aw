@@ -13,7 +13,6 @@ class PDFController extends Controller
     /**
      *  Download Event Registrations as PDF
      *
-     * @param  \App\Models\DinnerEvent  $dinnerEvent
      * @return \Illuminate\Http\Response
      */
     public function eventRegistrations($id)

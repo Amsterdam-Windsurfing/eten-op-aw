@@ -34,7 +34,9 @@ class DinnerEventRegistrationClosed extends Mailable
 
         $dinnerEvent = $this->dinnerEvent;
 
-        return $this->text('emails.dinner-events.registration-closed', compact('dinnerEvent'))
+        return $this
+            ->subject("Overzicht aanmeldingen woensdagavond eten")
+            ->text('emails.dinner-events.registration-closed', compact('dinnerEvent'))
             ->attachData($pdf->getDocumentAsString(),'Registratielijst_' . $this->dinnerEvent->id . '.pdf', [
                 'mime' => 'application/pdf',
         ]);

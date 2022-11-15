@@ -16,9 +16,11 @@ class DinnerEventConfirm extends Mailable
      *
      * @return void
      */
-    public function __construct(DinnerEvent $dinnerEvent)
+    public function __construct(DinnerEvent $dinnerEvent, $confirmUrl)
     {
         $this->dinnerEvent = $dinnerEvent;
+        $this->confirmUrl = $confirmUrl;
+
     }
 
     /**
@@ -29,6 +31,9 @@ class DinnerEventConfirm extends Mailable
     public function build()
     {
         $dinnerEvent = $this->dinnerEvent;
-        return $this->text('emails.dinner-events.confirm', compact('dinnerEvent'));
+        $confirmUrl = $this->confirmUrl;
+        return $this
+            ->subject("Bevestig je aanmelding voor het koken")
+            ->text('emails.dinner-events.confirm', compact('dinnerEvent', 'confirmUrl'));
     }
 }

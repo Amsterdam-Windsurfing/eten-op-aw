@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('/', \App\Http\Controllers\HomeController::class);
+
+Route::get('dinner-events/{id}/confirm', [\App\Http\Controllers\DinnerEventController::class, 'confirm'])
+    ->middleware('signed')
+    ->name('confirmDinnerEvent');
 Route::resource('dinner-events', \App\Http\Controllers\DinnerEventController::class);
 
+Route::get('event-registrations/{id}/confirm', [\App\Http\Controllers\EventRegistrationController::class, 'confirm'])
+    ->middleware('signed')
+    ->name('confirmEventRegistration');
 Route::resource('event-registrations', \App\Http\Controllers\EventRegistrationController::class);
 
 Route::name('admin.')->group(function () {

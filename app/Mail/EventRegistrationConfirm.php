@@ -17,9 +17,11 @@ class EventRegistrationConfirm extends Mailable
      *
      * @return void
      */
-    public function __construct(EventRegistration $eventRegistration)
+    public function __construct(EventRegistration $eventRegistration, $confirmUrl)
     {
         $this->eventRegistration = $eventRegistration;
+        $this->confirmUrl = $confirmUrl;
+
     }
 
     /**
@@ -30,6 +32,10 @@ class EventRegistrationConfirm extends Mailable
     public function build()
     {
         $eventRegistration = $this->eventRegistration;
-        return $this->text('emails.event-registrations.confirm', compact('eventRegistration'));
+        $confirmUrl = $this->confirmUrl;
+
+        return $this
+            ->subject("Bevestig je aanmelding voor het eten")
+            ->text('emails.event-registrations.confirm', compact('eventRegistration', 'confirmUrl'));
     }
 }

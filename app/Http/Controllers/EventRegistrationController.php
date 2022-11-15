@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRegistrationRequest;
-use App\Mail\DinnerEventConfirm;
 use App\Mail\EventRegistrationConfirm;
 use App\Models\EventRegistration;
 use App\Util\WednesdaysForDinnerEvents;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 class EventRegistrationController extends Controller
 {
@@ -24,16 +24,17 @@ class EventRegistrationController extends Controller
 
         $emailVerifiedBefore = EventRegistration::where('email', $request->post('email'))->whereNotNull('registration_verified_at')->count();
 
-        $createdEventRegistration = EventRegistration::create([
+        $eventRegistration = EventRegistration::create([
             "dinner_event_id" => $dinnerEvent->id,
             "registration_verified_at" => $emailVerifiedBefore ? now() : null,
             ...$request->validated()
         ]);
 
         // Send confirm email
-        Mail::to($createdEventRegistration->email)->send(new EventRegistrationConfirm($createdEventRegistration));
+        $confirmUrl = URL::signedRoute('confirmEventRegistration', ['id' => $eventRegistration->id]);
+        Mail::to($eventRegistration->email)->send(new EventRegistrationConfirm($eventRegistration, $confirmUrl));
 
-        return view('event-registrations.created', compact('createdEventRegistration'));
+        return view('event-registrations.created', compact('eventRegistration'));
     }
 
 
@@ -42,8 +43,18 @@ class EventRegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function confirm()
+    public function confirm($id)
     {
-        return [];
+        $eventRegistration = EventRegistration::findOrFail($id);
+
+        if ($eventRegistration->dinnerEvent->registration_deadline < now()) {
+            return view('event-registrations.confirm_error', compact('eventRegistration'));
+        }
+
+        $eventRegistration->update([
+            'registration_verified_at' => now(),
+        ]);
+
+        return view('event-registrations.confirmed', compact('eventRegistration'));
     }
 }
