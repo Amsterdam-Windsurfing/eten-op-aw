@@ -40,7 +40,8 @@ class EventRegistrationRequest extends FormRequest
                 'required',
             ],
             'allergies' => [
-                'string'
+                'string',
+                'nullable'
             ],
         ];
 
