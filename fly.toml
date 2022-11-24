@@ -24,6 +24,9 @@ processes = []
   MAILGUN_ENDPOINT = "api.eu.mailgun.net"
   MAIL_FROM_ADDRESS="no-reply@amsterdamwindsurfing.nl"
   MAIL_FROM_NAME="Amsterdam Windsurfing"
+  DEBUG_EMAILS=true
+  DEBUG_EMAIL_BCC="vincent@verbrugh.nl"
+
 
 [experimental]
   allowed_public_ports = []
