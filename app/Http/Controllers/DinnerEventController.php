@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\URL;
 
 class DinnerEventController extends Controller
 {
+    public function index() {
+        abort(404);
+    }
     /**
      * Store a newly created resource in storage.
      *
