@@ -11,12 +11,8 @@ storage/logs/*
 rr
 vendor
 
-public/build
-public/hot
-public/storage
-
-
 # 2. Ignore common files/directories we don't need
+fly.toml
 .vscode
 .idea
 **/*node_modules
@@ -28,3 +24,7 @@ public/storage
 **/*.log
 **/.DS_Store
 **/Thumbs.db
+
+public/hot
+public/build
+public/storage

@@ -1,36 +1,45 @@
-# fly.toml file generated for eten-op-aw on 2022-11-15T15:12:45+01:00
+# fly.toml app configuration file generated for eten-op-aw on 2023-05-09T00:58:41+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = "eten-op-aw"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
+primary_region = "ams"
 
 [build]
   [build.args]
-    NODE_VERSION = "16"
+    NODE_VERSION = "18"
     PHP_VERSION = "8.1"
+
+[deploy]
+  release_command = "php /var/www/html/artisan migrate --force"
 
 [env]
   APP_ENV = "production"
+  APP_LOCALE = "nl"
   APP_NAME = "Woensdagavond eten op AW"
   APP_TIMEZONE = "Europe/Amsterdam"
-  APP_LOCALE = "nl"
+  DB_CONNECTION = "pgsql"
+  DEBUG_EMAILS = "true"
+  DEBUG_EMAIL_BCC = "vincent@verbrugh.nl"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-  DB_CONNECTION = "pgsql"
-  MAIL_MAILER = "mailgun"
   MAILGUN_DOMAIN = "mg.amsterdamwindsurfing.nl"
   MAILGUN_ENDPOINT = "api.eu.mailgun.net"
-  MAIL_FROM_ADDRESS="no-reply@amsterdamwindsurfing.nl"
-  MAIL_FROM_NAME="Amsterdam Windsurfing"
-  DEBUG_EMAILS=true
-  DEBUG_EMAIL_BCC="vincent@verbrugh.nl"
-
+  MAIL_FROM_ADDRESS = "no-reply@amsterdamwindsurfing.nl"
+  MAIL_FROM_NAME = "Amsterdam Windsurfing"
+  MAIL_MAILER = "mailgun"
 
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
+
+[processes]
+  app = ""
+  cron = "cron -f"
 
 [[services]]
   http_checks = []
@@ -57,10 +66,3 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-
-[processes]
-  app = ""
-  cron = "cron -f"
-
-[deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
