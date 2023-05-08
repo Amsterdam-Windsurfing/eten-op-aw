@@ -5,7 +5,10 @@
     <p class="px-4 py-3 sm:px-6 text-sm text-red-600">{{ $message }}</p>
     @enderror
 
-    <div class="px-4 py-3 sm:px-6">
+    <div class="px-4 py-3 sm:px-6"
+         x-data="{ name: localStorage.getItem('name') }"
+         x-init="$watch('name', (val) => localStorage.setItem('name', val))"
+    >
         <div class="flex">
             <label for="name" class="block font-medium text-sm text-gray-600">Wat is je naam?</label>
             <img class="ml-auto mr-1" src="{{ asset('images/information-circle.svg') }}" width="22" height="22"
@@ -14,20 +17,27 @@
 
         <input type="text" name="name" id="name"
                class="form-input rounded-md shadow-sm mt-1 block w-full"
-               value="{{ old('name', '') }}"/>
+               value="{{ old('name', '') }}"
+               x-model="name"
+        />
         @error('name')
         <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
     </div>
 
-    <div class="px-4 py-5 sm:px-6">
+    <div class="px-4 py-5 sm:px-6"
+         x-data="{ email: localStorage.getItem('email') }"
+         x-init="$watch('email', (val) => localStorage.setItem('email', val))"
+    >
         <div class="flex">
             <label for="email" class="block font-medium text-sm text-gray-600">Wat is je e-mail?</label>
             <img class="ml-auto mr-1" src="{{ asset('images/information-circle.svg') }}" width="22" height="22"
                  @popper(Dit is nodig om je aanmelding te bevestigen.)/>
         </div>
         <input type="email" name="email" id="email" class="form-input rounded-md shadow-sm mt-1 block w-full"
-               value="{{ old('email', '') }}"/>
+               value="{{ old('email', '') }}"
+               x-model="email"
+        />
         @error('email')
         <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror

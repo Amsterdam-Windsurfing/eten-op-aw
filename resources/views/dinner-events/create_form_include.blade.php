@@ -12,7 +12,10 @@
         <p class="text-sm text-red-600">{{ $message }}</p>
     @enderror
 
-    <div class="px-4 py-3 sm:px-6">
+    <div class="px-4 py-3 sm:px-6"
+         x-data="{ name: localStorage.getItem('name') }"
+         x-init="$watch('name', (val) => localStorage.setItem('name', val))"
+    >
         <div class="flex">
             <label for="cook_name" class="block font-medium text-sm text-gray-600">Wat is je naam?</label>
             <img class="ml-auto mr-1" src="{{ asset('images/information-circle.svg') }}" width="22" height="22" @popper(Je naam wordt weergegeven op deze pagina.) />
@@ -20,7 +23,9 @@
 
         <input type="text" name="cook_name" id="cook_name"
                class="form-input rounded-md shadow-sm mt-1 block w-full"
-               value="{{ old('cook_name', '') }}"/>
+               value="{{ old('cook_name', '') }}"
+               x-model="name"
+        />
         @error('cook_name')
             <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -93,13 +98,18 @@
         @enderror
     </div>
 
-    <div class="px-4 py-5 sm:px-6">
+    <div class="px-4 py-5 sm:px-6"
+         x-data="{ email: localStorage.getItem('email') }"
+         x-init="$watch('email', (val) => localStorage.setItem('email', val))"
+    >
         <div class="flex">
             <label for="cook_email" class="block font-medium text-sm text-gray-600">Wat is je e-mail?</label>
             <img class="ml-auto mr-1" src="{{ asset('images/information-circle.svg') }}" width="22" height="22" @popper(Dit is nodig om je aanmelding als kok te bevestingen en voor het ontvangen van een overzicht van de aanmeldingen. Je e-mailadres wordt niet zichtbaar gemaakt en leden kunnen je geen berichten sturen.) />
         </div>
         <input type="email" name="cook_email" id="cook_email" class="form-input rounded-md shadow-sm mt-1 block w-full"
-               value="{{ old('cook_email', '') }}"/>
+               value="{{ old('cook_email', '') }}"
+               x-model="email"
+        />
         @error('cook_email')
             <p class="text-sm text-red-600">{{ $message }}</p>
         @enderror
