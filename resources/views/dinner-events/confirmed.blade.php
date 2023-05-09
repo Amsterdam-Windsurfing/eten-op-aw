@@ -14,7 +14,7 @@
             <p class="px-4 sm:px-6 my-3 text-base text-gray-700">Leuk dat je wilt gaan koken op woensdagavond {{ $dinnerEvent["date"]->translatedFormat('j F Y') }}!
             </p>
             <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
-                Je aanmelding is nu <strong>definitief</strong> en iedereen kan zich tot {{ $dinnerEvent["registration_deadline"]->translatedFormat('j F Y H:m') }} inschrijven voor jouw maaltijd.
+                Je aanmelding is nu <strong>definitief</strong> en iedereen kan zich tot {{ $dinnerEvent["registration_deadline"]->translatedFormat('j F Y H:i') }} inschrijven voor jouw maaltijd.
             </p>
             <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
                 Na de deadline voor het aanmelden ontvang je een overzicht van iedereen die mee wilt eten en eventuele opgegeven allergenen waar je rekening mee moet houden.

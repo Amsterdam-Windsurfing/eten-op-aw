@@ -15,8 +15,8 @@
 
         @include('event-registrations.summary_include', ['dinnerEvent' => $dinnerEvent, 'registrationsOptions' => $dinnerEvent->eventRegistrationsOptions()])
 
-        <p class="px-4 sm:px-6 py-2 text-base text-white-700 bg-slate-200">Je kan je aanmelden tot
-            <strong>{{ $dinnerEvent->registration_deadline->translatedFormat('l \d\e jS - H:m') }}</strong>.</p>
+        <p class="px-4 sm:px-6 py-2 text-base text-white-700 bg-slate-200">Je kunt je aanmelden tot
+            <strong>{{ $dinnerEvent->registration_deadline->translatedFormat('j F Y H:i') }}</strong>.</p>
 
     @else
         @include('dinner-events.create_form_include')
