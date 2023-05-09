@@ -53,6 +53,11 @@ class EventRegistrationController extends Controller
     {
         $eventRegistration = EventRegistration::findOrFail($id);
 
+        // simple return the successful verified message if already verified
+        if ($eventRegistration->registration_verified_at) {
+            return view('event-registrations.confirmed', compact('eventRegistration'));
+        }
+
         if ($eventRegistration->dinnerEvent->registration_deadline < now()) {
             return view('event-registrations.confirm_error', compact('eventRegistration'));
         }
