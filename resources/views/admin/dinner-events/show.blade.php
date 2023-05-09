@@ -74,6 +74,15 @@
                                         {{ $dinnerEvent->event_verified_at ? 'Ja (op ' . \Carbon\Carbon::parse($dinnerEvent->registration_deadline)->translatedFormat('d-m-Y H:i:s') . ')' : 'Nee' }}
                                     </td>
                                 </tr>
+                                <tr class="border-b">
+                                    <th scope="col"
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Overzicht verstuurd naar kok
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                        {{ $dinnerEvent-> cook_notified_at ? 'Ja (op ' . \Carbon\Carbon::parse($dinnerEvent-> cook_notified_at)->translatedFormat('d-m-Y H:i:s') . ')' : 'Nee' }}
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
