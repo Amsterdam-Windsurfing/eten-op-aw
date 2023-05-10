@@ -24,8 +24,8 @@ class MessageSendingListener
      * @return void
      */
     public function handle($event)
-    { 
-        if(! env("DEBUG_EMAILS")) { return; }
-        $event->message->addBcc(env('DEBUG_EMAIL_BCC') );
+    {
+        if(!config('debug.debug_emails')) { return; }
+        $event->message->addBcc( config('debug.debug_email_bcc') );
     }
 }
