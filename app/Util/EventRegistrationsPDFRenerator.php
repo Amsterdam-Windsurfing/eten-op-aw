@@ -100,12 +100,15 @@ class EventRegistrationsPDFRenerator {
             if ($eventRegistration->registration_verified_at == null) {
                 continue;
             }
-            $this->document->cell(136,9, " " . $eventRegistration->name,1,"","L");
-            $this->document->cell(36,9,["meat" => "Vlees", "vegetarian" => "Vegetarisch", "vegan" => "Vegan"][$eventRegistration->dinner_option],1,"","C");
-            $this->document->cell(18,9,"",1,"","C");
+
+            $border = $eventRegistration->allergies ? 'LTR' : 1;
+
+            $this->document->cell(136,9, " " . $eventRegistration->name, $border,"","L");
+            $this->document->cell(36,9,["meat" => "Vlees", "vegetarian" => "Vegetarisch", "vegan" => "Vegan"][$eventRegistration->dinner_option], 1,"","C");
+            $this->document->cell(18,9,"", 1,"","C");
             $this->document->Ln();
             if ($eventRegistration->allergies) {
-                $this->document->MultiCell(136 + 36 + 18,9, " Allergieen: " . $eventRegistration->allergies,1,"L", false);
+                $this->document->MultiCell(136 + 36 + 18,9, " Allergieen: " . $eventRegistration->allergies,"LBR","L", false);
             }
 
         }

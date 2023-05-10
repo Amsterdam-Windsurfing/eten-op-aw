@@ -1,6 +1,6 @@
 Hoi {{ $dinnerEvent->cook_name }},
 
-Het aanmelden voor "Samen eten op woensdag" waarvoor jij hebt aangegeven om te gaan koken op {{ $dinnerEvent->date }} is gesloten. @if ( $dinnerEvent->eventRegistrationsCount() === 1)
+Het aanmelden voor "Samen eten op woensdag" waarvoor jij hebt aangegeven om te gaan koken op {{ $dinnerEvent->date->translatedFormat('j F Y') }} is gesloten. @if ( $dinnerEvent->eventRegistrationsCount() === 1)
 Er heeft zich 1 persoon geregistreerd.
 @else
 Er hebben zich {{ $dinnerEvent->eventRegistrationsCount() }} personen geregistreerd.
