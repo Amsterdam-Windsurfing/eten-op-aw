@@ -91,7 +91,10 @@
         @enderror
     </div>
 
-    <div class="px-4 py-3 sm:px-6">
+    <div class="px-4 py-3 sm:px-6"
+         x-data="{ allergies: localStorage.getItem('allergies') }"
+         x-init="$watch('allergies', (val) => localStorage.setItem('allergies', val))"
+    >
         <div class="flex">
             <label for="allergies" class="block font-medium text-sm text-gray-600">Heb je allergieën waar rekening mee
                 gehouden moet worden?</label>
@@ -100,6 +103,7 @@
                  ook rekening mee is gehouden tijdens het koken.)/>
         </div>
         <textarea name="allergies" id="allergies"
+                  x-model="allergies"
                   class="form-input rounded-md shadow-sm mt-1 block w-full">{{ old('allergies', '') }}</textarea>
 
         @error('allergies')
