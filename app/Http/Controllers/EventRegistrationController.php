@@ -31,8 +31,27 @@ class EventRegistrationController extends Controller
         $eventRegistration = EventRegistration::create([
             'dinner_event_id' => $dinnerEvent->id,
             'registration_verified_at' => $emailVerifiedBefore ? now() : null,
-            ...$request->validated(),
+            'name' => $request->validated('name'),
+            'email' => $request->validated('email'),
+            'dinner_option' => $request->validated('dinner_option'),
+            'allergies' => $request->validated('allergies'),
         ]);
+
+        if ($request->validated('plus_one')) {
+            // also create any plus one records
+            foreach ($request->validated('plus_one') as $key => $plusOne) {
+
+                EventRegistration::create([
+                    'dinner_event_id' => $dinnerEvent->id,
+                    'registration_verified_at' => $emailVerifiedBefore ? now() : null,
+                    'name' => $plusOne['name'],
+                    'email' => $request->validated('email'),
+                    'dinner_option' => $plusOne['dinner_option'],
+                    'allergies' => $plusOne['allergies'],
+                    'plus_one' => $key + 1,
+                ]);
+            }
+        }
 
         if (! $emailVerifiedBefore) {
             // Send confirm email
@@ -64,6 +83,17 @@ class EventRegistrationController extends Controller
         $eventRegistration->update([
             'registration_verified_at' => now(),
         ]);
+
+        // lookup any linked plus one records and set as verified
+        $plusOneEventRegistrations = EventRegistration::where('email', $eventRegistration->email)
+            ->where('dinner_event_id', $eventRegistration->dinner_event_id)
+            ->get();
+
+        foreach ($plusOneEventRegistrations as $plusOneEventRegistration) {
+            $plusOneEventRegistration->update([
+                'registration_verified_at' => now(),
+            ]);
+        }
 
         return view('event-registrations.confirmed', compact('eventRegistration'));
     }

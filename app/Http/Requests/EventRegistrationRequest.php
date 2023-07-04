@@ -42,6 +42,19 @@ class EventRegistrationRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'plus_one' => 'nullable|array',
+            'plus_one.*.name' => [
+                'string',
+                'required',
+            ],
+            'plus_one.*.dinner_option' => [
+                'in:meat,vegetarian,vegan',
+                'required',
+            ],
+            'plus_one.*.allergies' => [
+                'string',
+                'nullable',
+            ],
         ];
 
         return $rules;
@@ -60,8 +73,9 @@ class EventRegistrationRequest extends FormRequest
                 $validator->errors()->add('general', 'No dinner event found for next wednesday.');
             }
 
-            if (EventRegistration::where('email', $validator->getData()['email'])->where('dinner_event_id', $dinnerEvent->id)->exists()) {
-                $validator->errors()->add('email', 'Je ben al aangemeld voor deze woensdagavond.');
+            if (EventRegistration::where('email', $validator->getData()['email'])
+                ->where('dinner_event_id', $dinnerEvent->id)->where('plus_one', 0)->exists()) {
+                $validator->errors()->add('email', 'Je bent al aangemeld voor deze woensdagavond.');
             }
 
             if ($dinnerEvent->registration_deadline < now()) {
