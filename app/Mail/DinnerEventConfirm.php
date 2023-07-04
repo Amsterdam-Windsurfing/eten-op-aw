@@ -32,8 +32,9 @@ class DinnerEventConfirm extends Mailable
     {
         $dinnerEvent = $this->dinnerEvent;
         $confirmUrl = $this->confirmUrl;
+
         return $this
-            ->subject("Bevestig je aanmelding voor het koken")
+            ->subject('Bevestig je aanmelding voor het koken')
             ->text('emails.dinner-events.confirm', compact('dinnerEvent', 'confirmUrl'));
     }
 }

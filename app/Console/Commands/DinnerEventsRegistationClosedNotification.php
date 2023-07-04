@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Mail\DinnerEventRegistrationClosed;
 use App\Models\DinnerEvent;
-use App\Support\DripEmailer;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -41,11 +40,9 @@ class DinnerEventsRegistationClosedNotification extends Command
 
             Mail::to($dinnerEvent->cook_email)->send(new DinnerEventRegistrationClosed($dinnerEvent));
 
-            return $this->info('Dinner events have been checked for closed registrations, an email has been sent to the cook for event #' . $dinnerEvent->id);
+            return $this->info('Dinner events have been checked for closed registrations, an email has been sent to the cook for event #'.$dinnerEvent->id);
         } else {
             return $this->info('Dinner events have been checked for closed registrations, no events were found that are past the registration deadline');
         }
     }
 }
-
-

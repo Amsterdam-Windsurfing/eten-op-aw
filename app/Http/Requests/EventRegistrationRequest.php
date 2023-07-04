@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\DinnerEvent;
 use App\Models\EventRegistration;
 use App\Util\WednesdaysForDinnerEvents;
 use Illuminate\Foundation\Http\FormRequest;
@@ -41,7 +40,7 @@ class EventRegistrationRequest extends FormRequest
             ],
             'allergies' => [
                 'string',
-                'nullable'
+                'nullable',
             ],
         ];
 
@@ -55,9 +54,9 @@ class EventRegistrationRequest extends FormRequest
 
             // event registrations are always for next wednesday
             $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
-            $dinnerEvent = $nextWednesdays[0]["dinnerEvent"];
+            $dinnerEvent = $nextWednesdays[0]['dinnerEvent'];
 
-            if (!$dinnerEvent) {
+            if (! $dinnerEvent) {
                 $validator->errors()->add('general', 'No dinner event found for next wednesday.');
             }
 

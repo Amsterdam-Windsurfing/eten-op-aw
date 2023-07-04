@@ -30,15 +30,15 @@ class DinnerEventRegistrationClosed extends Mailable
     public function build()
     {
         // create PDF file
-        $pdf = new EventRegistrationsPDFRenerator($this->dinnerEvent, resource_path() . "/images/logo.png");
+        $pdf = new EventRegistrationsPDFRenerator($this->dinnerEvent, resource_path().'/images/logo.png');
 
         $dinnerEvent = $this->dinnerEvent;
 
         return $this
-            ->subject("Overzicht aanmeldingen woensdagavond eten")
+            ->subject('Overzicht aanmeldingen woensdagavond eten')
             ->text('emails.dinner-events.registration-closed', compact('dinnerEvent'))
-            ->attachData($pdf->getDocumentAsString(),'Registratielijst_' . $this->dinnerEvent->id . '.pdf', [
+            ->attachData($pdf->getDocumentAsString(), 'Registratielijst_'.$this->dinnerEvent->id.'.pdf', [
                 'mime' => 'application/pdf',
-        ]);
+            ]);
     }
 }

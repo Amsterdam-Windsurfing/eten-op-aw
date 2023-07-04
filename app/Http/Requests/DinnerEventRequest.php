@@ -66,7 +66,7 @@ class DinnerEventRequest extends FormRequest
 
             // public creation of events are always for next wednesday
             $nextWednesdays = WednesdaysForDinnerEvents::getWednesdaysForDinnerEvents(1);
-            $date = $nextWednesdays[0]["date"]->getTimestamp();
+            $date = $nextWednesdays[0]['date']->getTimestamp();
 
             // there must NOT already be a verified dinner event on that date
             $existingEvent = DinnerEvent::where('date', date('Y-m-d', $date))->whereNotNull('event_verified_at')->first();
@@ -77,13 +77,13 @@ class DinnerEventRequest extends FormRequest
             $registrationDeadline = strtotime($validator->getData()['registration_deadline']);
 
             // the registration deadline must be after the saturday before the event AND before midnight of the event (in case of a late registration possibility)
-            $saturdayBefore = strtotime("-1 week Saturday", $date);
+            $saturdayBefore = strtotime('-1 week Saturday', $date);
             if ($registrationDeadline < $saturdayBefore) {
                 $validator->errors()->add('registration_deadline', 'Dit is een ongeldige datum voor deze woensdag.');
             }
 
             // wednesday night of the date
-            $wednesdayNight = strtotime("23:59", $date);
+            $wednesdayNight = strtotime('23:59', $date);
             if ($registrationDeadline > $wednesdayNight) {
                 $validator->errors()->add('registration_deadline', 'Dit is een ongeldige datum voor deze woensdag.');
             }
@@ -92,7 +92,7 @@ class DinnerEventRequest extends FormRequest
             $meatOption = $validator->getData()['meat_option'];
             $vegetarianOption = $validator->getData()['vegetarian_option'];
             $veganOption = $validator->getData()['vegan_option'];
-            if (!$meatOption && !$vegetarianOption && !$veganOption) {
+            if (! $meatOption && ! $vegetarianOption && ! $veganOption) {
                 $validator->errors()->add('dinner_options', 'Je moet aangeven of je vlees, vegetarisch en/of vegan gaat koken.');
             }
         });
@@ -112,12 +112,10 @@ class DinnerEventRequest extends FormRequest
         ]);
     }
 
-
     /**
      * Convert to boolean
      *
-     * @param $booleable
-     * @return boolean
+     * @return bool
      */
     private function toBoolean($booleable)
     {

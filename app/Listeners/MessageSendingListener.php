@@ -2,9 +2,6 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-
 class MessageSendingListener
 {
     /**
@@ -25,7 +22,7 @@ class MessageSendingListener
      */
     public function handle($event)
     {
-        if(config('debug.debug_email_bcc')) {
+        if (config('debug.debug_email_bcc')) {
             $event->message->addBcc(config('debug.debug_email_bcc'));
         }
     }

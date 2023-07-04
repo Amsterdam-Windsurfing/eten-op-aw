@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventRegistration extends Model
 {
@@ -21,7 +20,7 @@ class EventRegistration extends Model
         'allergies',
         'dinner_option',
         'dinner_event_id',
-        'registration_verified_at'
+        'registration_verified_at',
     ];
 
     public function dinnerEvent()

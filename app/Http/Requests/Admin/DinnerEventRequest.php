@@ -75,7 +75,7 @@ class DinnerEventRequest extends FormRequest
                 $date = strtotime($validator->getData()['date']);
 
                 // the date must be on a wednesday
-                if (date("l", $date) != "Wednesday") {
+                if (date('l', $date) != 'Wednesday') {
                     $validator->errors()->add('date', 'The date must be on a Wednesday');
                 }
 
@@ -92,13 +92,13 @@ class DinnerEventRequest extends FormRequest
             $registrationDeadline = strtotime($validator->getData()['registration_deadline']);
 
             // the registration deadline must be after the saturday before the event AND before midnight of the event (in case of a late registration possibility)
-            $saturdayBefore = strtotime("-1 week Saturday", $date);
+            $saturdayBefore = strtotime('-1 week Saturday', $date);
             if ($registrationDeadline < $saturdayBefore) {
                 $validator->errors()->add('registration_deadline', 'The registration deadline must be after the saturday before the event');
             }
 
             // wednesday night of the date
-            $wednesdayNight = strtotime("23:59", $date);
+            $wednesdayNight = strtotime('23:59', $date);
             if ($registrationDeadline > $wednesdayNight) {
                 $validator->errors()->add('registration_deadline', 'The registration deadline must be before midnight of the event');
             }
@@ -107,7 +107,7 @@ class DinnerEventRequest extends FormRequest
             $meatOption = $validator->getData()['meat_option'];
             $vegetarianOption = $validator->getData()['vegetarian_option'];
             $veganOption = $validator->getData()['vegan_option'];
-            if (!$meatOption && !$vegetarianOption && !$veganOption) {
+            if (! $meatOption && ! $vegetarianOption && ! $veganOption) {
                 $validator->errors()->add('dinner_options', 'At least one dinner option must be checked.');
             }
         });
@@ -129,15 +129,13 @@ class DinnerEventRequest extends FormRequest
         // the date may not be changed after creation
         if ($this->routeIs('dinner-events.update')) {
             $this->request->remove('date');
-       }
+        }
     }
-
 
     /**
      * Convert to boolean
      *
-     * @param $booleable
-     * @return boolean
+     * @return bool
      */
     private function toBoolean($booleable)
     {

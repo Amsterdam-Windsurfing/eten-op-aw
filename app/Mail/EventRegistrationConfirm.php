@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\DinnerEvent;
 use App\Models\EventRegistration;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -35,7 +34,7 @@ class EventRegistrationConfirm extends Mailable
         $confirmUrl = $this->confirmUrl;
 
         return $this
-            ->subject("Bevestig je aanmelding voor het eten")
+            ->subject('Bevestig je aanmelding voor het eten')
             ->text('emails.event-registrations.confirm', compact('eventRegistration', 'confirmUrl'));
     }
 }

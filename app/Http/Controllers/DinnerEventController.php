@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\URL;
 
 class DinnerEventController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         abort(404);
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\DinnerEventRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(DinnerEventRequest $request)
@@ -26,7 +27,7 @@ class DinnerEventController extends Controller
         $nextWednesday = $nextWednesdays[0];
 
         $createdDinnerEvent = DinnerEvent::create([
-            "date" => $nextWednesdays[0]["date"]->toDate(),
+            'date' => $nextWednesdays[0]['date']->toDate(),
             ...$request->validated()]);
 
         // Send confirm email
@@ -34,6 +35,7 @@ class DinnerEventController extends Controller
         Mail::to($createdDinnerEvent->cook_email)->send(new DinnerEventConfirm($createdDinnerEvent, $confirmUrl));
 
         $cookName = $createdDinnerEvent->cook_name;
+
         return view('dinner-events.created', compact('nextWednesday', 'cookName'));
 
     }
@@ -48,7 +50,7 @@ class DinnerEventController extends Controller
         $dinnerEvent = DinnerEvent::findOrFail($id);
 
         // check if there is not already a verified dinner event for this date
-        $existingEvent = DinnerEvent::where('date', $dinnerEvent["date"]->format('Y-m-d'))->whereNotNull('event_verified_at')->first();
+        $existingEvent = DinnerEvent::where('date', $dinnerEvent['date']->format('Y-m-d'))->whereNotNull('event_verified_at')->first();
 
         if ($existingEvent && $existingEvent->id !== $dinnerEvent->id) {
             return view('dinner-events.confirm_error', compact('dinnerEvent'));

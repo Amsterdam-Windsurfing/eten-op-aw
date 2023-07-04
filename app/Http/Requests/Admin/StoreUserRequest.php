@@ -9,11 +9,11 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => [
+            'name' => [
                 'string',
                 'required',
             ],
-            'email'    => [
+            'email' => [
                 'required',
                 'unique:users',
             ],

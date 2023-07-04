@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DinnerEventRequest;
-use App\Http\Requests\UpdateDinnerEventRequest;
 use App\Models\DinnerEvent;
 use App\Util\WednesdaysForDinnerEvents;
 use Carbon\Carbon;
@@ -39,13 +38,12 @@ class DinnerEventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\Admin\DinnerEventRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(DinnerEventRequest $request)
     {
         // dinner events created by admin users are automatically verified
-        $createdDinnerEvent = DinnerEvent::create(["event_verified_at" => Carbon::now(), ...$request->validated()]);
+        $createdDinnerEvent = DinnerEvent::create(['event_verified_at' => Carbon::now(), ...$request->validated()]);
 
         return redirect()->route('admin.dinner-events.index');
     }
@@ -53,7 +51,6 @@ class DinnerEventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\DinnerEvent $dinnerEvent
      * @return \Illuminate\Http\Response
      */
     public function show(DinnerEvent $dinnerEvent)
@@ -64,7 +61,6 @@ class DinnerEventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\DinnerEvent $dinnerEvent
      * @return \Illuminate\Http\Response
      */
     public function edit(DinnerEvent $dinnerEvent)
@@ -75,8 +71,6 @@ class DinnerEventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\Admin\DinnerEventRequest $request
-     * @param \App\Models\DinnerEvent $dinnerEvent
      * @return \Illuminate\Http\Response
      */
     public function update(DinnerEventRequest $request, DinnerEvent $dinnerEvent)
@@ -89,7 +83,6 @@ class DinnerEventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\DinnerEvent $dinnerEvent
      * @return \Illuminate\Http\Response
      */
     public function destroy(DinnerEvent $dinnerEvent)
