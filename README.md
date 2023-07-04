@@ -62,3 +62,9 @@ Simply run the following docker command:
     docker run --pull always -p 23517:8000  -p 9912:9912 -p 9913:9913 butschster/buggregator:latest
 
 And access the debugger at http://0.0.0.0:23517/
+
+## Linting
+
+You can run pint with the following command:
+
+    ./vendor/bin/sail composer lint
