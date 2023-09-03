@@ -15,6 +15,10 @@
                     allergies: {
                         value: '{{ old('plus_one.' . $loop->index .'.allergies') }}',
                         error: '@if($errors->has('plus_one.' . $loop->index .'.allergies')){{ $errors->first('plus_one.' . $loop->index .'.allergies') }}@endif'
+                    },
+                    after_training: {
+                        value: {{ old('plus_one.' . $loop->index .'.after_training') ? 'true' : 'false' }},
+                        error: '@if($errors->has('plus_one.' . $loop->index .'.after_training')){{ $errors->first('plus_one.' . $loop->index .'.after_training') }}@endif'
                     }
                 },
             @endforeach
@@ -121,7 +125,7 @@
             @enderror
         </div>
 
-        <div class="px-4 py-3 sm:px-6 mb-4"
+        <div class="px-4 py-3 sm:px-6"
              x-data="{ allergies: localStorage.getItem('allergies') }"
              x-init="$watch('allergies', (val) => localStorage.setItem('allergies', val))"
         >
@@ -140,6 +144,16 @@
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
        </div>
+
+        <div class="px-4 sm:px-6 mb-4">
+            <input type="checkbox" name="after_training" id="after_training" class="shadow-sm" value="1" @checked(old('after_training')) />
+
+            <label for="after_training" class="font-medium text-sm text-gray-600 ml-2">Ik doe mee aan de training en wil graag daarna eten </label>
+
+            @error('after_training')
+            <p class="text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
 
         <div x-show="plusOneItems.length == 0">
             @include('event-registrations.action_section_include')
@@ -215,7 +229,7 @@
                     <p class="text-sm text-red-600" x-show="item.dinner_option.error" x-text="item.dinner_option.error"></p>
                 </div>
 
-                <div class="px-4 py-3 sm:px-6 mb-4">
+                <div class="px-4 py-3 sm:px-6">
                     <div class="flex">
                         <label x-bind:for="`plus_one[${index}][allergies]`" class="block font-medium text-sm text-gray-600">Heeft je gast allergieën waar rekening mee
                             gehouden moet worden?</label>
@@ -226,6 +240,14 @@
                     <p class="text-sm text-red-600" x-show="item.allergies.error" x-text="item.allergies.error"></p>
 
             </div>
+
+                <div class="px-4 sm:px-6 mb-4">
+                    <input type="checkbox" x-bind:name="`plus_one[${index}][after_training]`"  x-bind:id="`plus_one[${index}][after_training]`" x-model="item.after_training.value" class="shadow-sm" value="1" />
+
+                    <label for="after_training" x-bind:for="`plus_one[${index}][after_training]`" class="font-medium text-sm text-gray-600 ml-2">Mijn gast doet mee aan de training en wil graag daarna eten</label>
+
+                    <p class="text-sm text-red-600" x-show="item.after_training.error" x-text="item.after_training.error"></p>
+                </div>
             </div>
 
             <div x-show="index === plusOneItems.length - 1">

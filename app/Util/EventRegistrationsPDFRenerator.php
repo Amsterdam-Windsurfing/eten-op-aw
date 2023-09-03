@@ -123,8 +123,9 @@ class EventRegistrationsPDFRenerator
 
         $this->document->SetFont(self::FONT_FAMILY, 'B', 8);
 
-        $this->document->cell(136, 9, 'Naam', 1, '', 'L');
+        $this->document->cell(100, 9, 'Naam', 1, '', 'L');
         $this->document->cell(36, 9, 'Optie', 1, '', 'C');
+        $this->document->cell(36, 9, 'Na training', 1, '', 'C');
         $this->document->cell(18, 9, 'Betaald', 1, '', 'C');
         $this->document->Ln();
 
@@ -135,8 +136,9 @@ class EventRegistrationsPDFRenerator
                 continue;
             }
 
-            $this->document->cell(136, 9, $eventRegistration->name, 1, '', 'L');
+            $this->document->cell(100, 9, $eventRegistration->name, 1, '', 'L');
             $this->document->cell(36, 9, ['meat' => 'Vlees', 'vegetarian' => 'Vegetarisch', 'vegan' => 'Vegan'][$eventRegistration->dinner_option], 1, '', 'C');
+            $this->document->cell(36, 9, ($eventRegistration->after_training ? 'Ja' : ''), 1, '', 'C');
             $this->document->cell(18, 9, '', 1, '', 'C');
             $this->document->Ln();
 
@@ -144,8 +146,9 @@ class EventRegistrationsPDFRenerator
 
         // write 10 extra lines for late registrations
         for ($i = 0; $i < 15; $i++) {
-            $this->document->cell(136, 9, '', 1, '', 'L');
+            $this->document->cell(100, 9, '', 1, '', 'L');
             $this->document->cell(36, 9, '', 1, '', 'C');
+            $this->document->cell(36, 9,  '', 1, '', 'C');
             $this->document->cell(18, 9, '', 1, '', 'C');
             $this->document->Ln();
         }

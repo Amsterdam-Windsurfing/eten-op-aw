@@ -22,6 +22,7 @@ class EventRegistration extends Model
         'dinner_event_id',
         'registration_verified_at',
         'plus_one',
+        'after_training',
     ];
 
     public function dinnerEvent()

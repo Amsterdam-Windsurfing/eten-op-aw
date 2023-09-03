@@ -95,7 +95,7 @@
 
             <h5 class="font-medium leading-tight text-2xl mt-10 mb-6">Overzicht inschrijvingen</h5>
 
-            @include('admin.event-registrations.index_include', ['eventRegistrations' => $dinnerEvent->eventRegistrations])
+            @include('admin.event-registrations.index_include', ['eventRegistrations' => $dinnerEvent->eventRegistrations->sortBy('id')])
 
             <div class="mt-8">
                 <a href="{{ route('admin.dinner-events.overview-pdf', $dinnerEvent->id) }}"

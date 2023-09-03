@@ -35,12 +35,12 @@ class EventRegistrationController extends Controller
             'email' => $request->validated('email'),
             'dinner_option' => $request->validated('dinner_option'),
             'allergies' => $request->validated('allergies'),
+            'after_training' => $request->boolean('after_training'),
         ]);
 
         if ($request->validated('plus_one')) {
             // also create any plus one records
             foreach ($request->validated('plus_one') as $key => $plusOne) {
-
                 EventRegistration::create([
                     'dinner_event_id' => $dinnerEvent->id,
                     'registration_verified_at' => $emailVerifiedBefore ? now() : null,
@@ -48,6 +48,7 @@ class EventRegistrationController extends Controller
                     'email' => $request->validated('email'),
                     'dinner_option' => $plusOne['dinner_option'],
                     'allergies' => $plusOne['allergies'],
+                    'after_training' => $request->boolean('plus_one.' . $key . '.after_training'),
                     'plus_one' => $key + 1,
                 ]);
             }
