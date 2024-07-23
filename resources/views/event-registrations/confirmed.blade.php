@@ -16,6 +16,10 @@
                 Je aanmelding voor het eten is nu <strong>definitief</strong>.
             </p>
 
+            <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
+                Denk eraan om af te rekenen aan de bar voordat je weggaat.
+            </p>
+
             <h4 class="px-4 sm:px-6 py-2 my-4 text-md font-semibold text-gray-900">Tot woensdag!</h4>
         </div>
     </div>
