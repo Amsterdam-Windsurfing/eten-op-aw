@@ -17,7 +17,7 @@
                 Je aanmelding is nu <strong>definitief</strong> en iedereen kan zich tot {{ $dinnerEvent["registration_deadline"]->translatedFormat('j F Y H:i') }} inschrijven voor jouw maaltijd.
             </p>
             <p class="px-4 sm:px-6 my-3 text-base text-gray-700">
-                Na de deadline voor het aanmelden ontvang je een overzicht van iedereen die mee wilt eten en eventuele opgegeven allergenen waar je rekening mee moet houden.
+                Na de deadline voor het aanmelden ontvang je een overzicht van iedereen die mee wil eten en eventuele opgegeven allergenen waar je rekening mee moet houden.
             </p>
 
             <h4 class="px-4 sm:px-6 py-2 my-4 text-md font-semibold text-gray-900">Succes met koken woensdag!</h4>

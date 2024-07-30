@@ -3,7 +3,7 @@
 
     <p class="px-4 sm:px-6 mt-5 text-base text-gray-700">We hebben nog niemand die gaat koken deze
         woensdagavond. Heb je zin om te koken? Meld je dan aan als kok. Je ontvangt na de deadline voor het
-        aanmelden een overzicht van iedereen die mee wilt eten per e-mail.</p>
+        aanmelden een overzicht van iedereen die mee wil eten per e-mail.</p>
 
     <h4 class="px-4 sm:px-6 py-2 mt-4 text-md font-semibold text-gray-900">Ja, ik ga koken! <span
             class="text-2xl align-middle">👩‍🍳</span></h4>
